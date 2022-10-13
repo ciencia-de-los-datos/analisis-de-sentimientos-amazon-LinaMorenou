@@ -1,12 +1,10 @@
 """
 Análisis de Sentimientos usando Naive Bayes
 -----------------------------------------------------------------------------------------
-
 El archivo `amazon_cells_labelled.txt` contiene una serie de comentarios sobre productos
 de la tienda de amazon, los cuales están etiquetados como positivos (=1) o negativos (=0)
 o indterminados (=NULL). En este taller se construirá un modelo de clasificación usando
 Naive Bayes para determinar el sentimiento de un comentario.
-
 """
 import numpy as np
 import pandas as pd
@@ -21,24 +19,33 @@ def pregunta_01():
     # Lea el archivo `amazon_cells_labelled.tsv` y cree un DataFrame usando pandas.
     # Etiquete la primera columna como `msg` y la segunda como `lbl`. Esta función
     # retorna el dataframe con las dos columnas.
-     df  =  pd . read_csv ( 'amazon_cells_labelled.tsv' ,
-        septiembre = ' \t ' ,
-        encabezado = ninguno ,
-        nombres = [ ' mensaje' , 'lbl' ],
+    df = pd.read_csv(
+        'amazon_cells_labelled.tsv',
+        sep='\t',
+        header= None,
+        names=['msg', 'lbl'],
     )
+
     # Separe los grupos de mensajes etiquetados y no etiquetados.
-    df_etiquetado  =  df [ df [ "lbl" ]. nona ()]
-    df_sin etiquetar  =  df [ df [ "lbl" ]. esna ()]
+    df = pd.read_csv(
+        'amazon_cells_labelled.tsv',
+        sep='\t',
+        header= None,
+        names=['msg', 'lbl'],
+    )
 
-    x_etiquetado  =  df_etiquetado [ "mensaje" ]
-    y_etiquetado  =  df_etiquetado [ "lbl" ]
+    # Separe los grupos de mensajes etiquetados y no etiquetados.
+    df_tagged = df[df["lbl"].notna()]
+    df_untagged = df[df["lbl"].isna()]
 
-    x_sin etiquetar  =  df_sin etiquetar [ "mensaje" ]
-    y_sin etiquetar  =  df_sin etiquetar [ "lbl" ]
-    
+    x_tagged = df_tagged["msg"]
+    y_tagged = df_tagged["lbl"]
+
+    x_untagged = df_untagged["msg"]
+    y_untagged = df_untagged["lbl"]
+
     # Retorne los grupos de mensajes
     return x_tagged, y_tagged, x_untagged, y_untagged
-
 
 def pregunta_02():
     """
